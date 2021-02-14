@@ -1,0 +1,136 @@
+.favorite_print_c,.search_icon_c,.word_delete_c,.refresh_c,.memo_icon_c,.tts_c,label span{
+	cursor:pointer;
+}
+.favorite_print_c{
+	top:41em;
+	left:49em;
+}
+.refresh_c{
+	top:5.6em;
+	left:32.2em;
+}
+.search_wd_c{
+	top:7.1em;
+	left:42em;
+}
+.table_name_c{
+	top:0.8em;
+	left:1.0em;
+	font-weight: bold;
+	font-size:4em;
+	color:yellowgreen;
+}
+.memo_icon_c{
+	vertical-align:middle;
+}
+.empty_table_c{
+	top:7em;
+	left:10em;
+	display:none;
+}
+.over_flow_c{
+  max-height:25.6em;
+  max-width:47em;
+  overflow:auto;
+  top:8em;
+  left:6em;
+  }
+.word_table_c{
+  font-size:15px;
+  height:60%;
+  width:96%;
+  border-radius:6px;
+  border:1px solid black;
+  }
+  .word_table_c>tbody>tr>td{
+  background-color:ghostwhite;
+  white-space: nowrap;
+  padding-left:1%;
+  border-bottom:1px solid darkred;
+  }
+  .word_table_c>tbody>tr>td:nth-child(1),.word_table_c>tbody>tr>td:nth-child(2){
+  width:20%;
+  }
+  .word_table_c>tbody>tr:last-child>td{
+  border-bottom:0px solid black;
+  }
+   .word_table_c>tbody>tr>td:nth-child(3){
+  width:20%;
+  text-align:center;
+  }
+  .word_table_c>tbody>tr>td:nth-child(5){
+  width:18%;
+  text-align:right;
+  padding:0;
+  }
+  .word_table_c>tbody>tr>td:nth-child(4){
+  width:1%;
+  }
+  .word_table_c>tbody>tr>td:last-child{
+  width:20%;
+  }
+  tr{
+  background:#BDBDBD;
+  }
+  .tr_c{
+  background:white;
+  }
+  .tts_c{
+  width:50%;
+  }
+  .word_table_c>tbody>tr:hover>td{
+   background:#f2f2f2;
+  }
+  .word_table_c>tbody>tr:active>td{
+   background:#BDBDBD;
+  }
+  .favorite_box_c{
+  display:none;
+  }
+  label{
+  color:red;
+  }
+  label span{
+   display:inline-block;
+   width:39%;
+   height:89%;
+  vertical-align:middle;
+  background:url(../image/button/favorite.png)no-repeat;
+  }
+  .favorite_box_c:checked +label span{
+  background:url(../image/button/favorite_check.png)no-repeat;
+  }
+ .word_input_button_c {
+	color: #606060;
+	border: solid 1px #b7b7b7;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+	cursor: pointer;
+	padding: 0.4em 2em 0.4em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	font-size:2em;
+	top:17.5em;
+	left:3em;
+}
+.word_input_button_c:hover {	
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+	
+	text-decoration: none;
+}
+.word_input_c{
+	font-size:1.5em;
+	top:23.6em;
+	left:16.1em;
+}
+.mean_input_c{
+	font-size:1.5em;
+	top:25em;
+	left:17.7em;
+}
+.search_icon_c{
+	top:5.5em;
+	left:47em;
+	width:2em;
+}

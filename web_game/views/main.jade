@@ -1,0 +1,76 @@
+html
+  head
+    link(rel='stylesheet' href='css/main1.css?ver=1')
+    link(rel='stylesheet' href='css/table1.css?ver=1')
+    meta(charset='UTF-8')
+    title 이종현 & 김예서
+  body
+  
+    #main_bg.main_bg_c
+      .thumbnail
+        #start.start_c
+          img#start_img.start_img_c(src='image/bg/login.png')
+          img#start_button.start_button_c(src='image/button/start.png' onmouseover="this.src='image/button/start_hover.png'" onmouseout="this.src='image/button/start.png'")
+        // start div
+        #menu.menu_c
+        // menu div
+        #login_info.login_info_c
+         span#lg_name.lg_name_c= name
+          님 환영합니다!
+          br
+          button#logout_bt.logout_bt_c(onclick="location.href='logout'") logout
+        // 로그인 기록
+
+
+        #enter_menu1.enter_menu1_c
+          #menu1-1.menu1-1_c
+            input#file_name_input.file_name_input_c(type='text' maxlength='10' placeholder='파일이름 입력')
+            img#file_select.file_select_c(src='image/folder/file_select.png' onmouseover="this.src='image/folder/file_select_hover.png'" onmouseout="this.src='image/folder/file_select.png'")
+            img#file_delete.file_delete_c(src='image/folder/file_select.png' onmouseover="this.src='image/folder/file_select_hover.png'" onmouseout="this.src='image/folder/file_select.png'")
+            img#file_add.file_add_c(src='image/folder/file_add.png' onmouseover="this.src='image/folder/file_add_hover.png'" onmouseout="this.src='image/folder/file_add.png'")
+            #all_file.all_file_c
+            #all_file_name.all_file_name_c
+          // 파일메뉴
+          #menu1-2.menu1-2_c
+            span#table_name.table_name_c
+            button#favorite_print.favorite_print_c(onclick='favorite_print();') 즐겨찾기 단어보기
+            input#search_wd.search_wd_c(type='text')
+            img#refresh.refresh_c(src='image/button/refresh.png')
+            img#search_icon.search_icon_c(src='image/button/search_icon.png')
+            img#empty_table.empty_table_c(src='image/bg/empty_table.png')
+            #over_flow.over_flow_c
+              table#word_table.word_table_c(cellspacing='0')
+                tbody#t_body.t_body_c
+            #word_input_button.word_input_button_c(onclick='insert_click();') 단어 입력
+            #word_input.word_input_c
+              | 영단어: 
+              input#creat_word(type='Text' value='' size='7px')
+            #mean_input.mean_input_c
+              | 뜻: 
+              input#creat_mean(type='Text' value='' size='7px')
+          // 단어장 메뉴
+          img#detail_menu_bg.detail_menu_bg_c(src='image/bg/detail_menu.png')
+          img#back.back_c(src='image/button/back.png' onmouseover="this.src='image/button/back_hover.png'" onmouseout="this.src='image/button/back.png'")
+        // enter_menu1 div
+        #enter_menu2.enter_menu2_c
+          #game.game_c
+          select#select_word_dtn.select_word_dtn_c(name='select_word_dtn')
+          // 캔버스
+          img#back.back_c(src='image/button/back.png' onmouseover="this.src='image/button/back_hover.png'" onmouseout="this.src='image/button/back.png'")
+          img#detail_menu_bg.detail_menu_bg_c(src='image/bg/detail_menu.png')
+        // enter_menu2 div
+        // 위치잡아주기(thumbnail)
+        // main_bg div
+        script(type='text/javascript' src='js/opensource/jquery-1.10.1.min.js')
+        script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+        script(src='js/opensource/phaser.min.js')
+        script(src='js/game/start_g.js?ver=5')
+        script(src='js/game/main_g/player.js?ver=2')
+        script(src='js/game/main_g/set_wordarr.js?ver=2')
+        script(src='js/game/main_g/main_g.js?ver=5')
+        script(src='js/game/end_g.js?ver=5')
+        script(src='js/ajax.js?ver=5')
+        script(src='js/initialize1.js?ver=5')
+        script(src='js/word_data1.js?ver=5')
+        script(src='js/file.js?ver=5')
+        script(src='js/main1_js.js?ver=2')

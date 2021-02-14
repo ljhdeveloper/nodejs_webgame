@@ -1,0 +1,83 @@
+@FONT-FACE{font-family: "jua";src: url("../font/BMJUA_ttf.ttf");}
+@FONT-FACE{font-family: "hanna_air";src: url("../font/BMHANNAAir_ttf.ttf");}
+body{
+	font-family:"jua";
+}
+.main_bg_c{
+	margin:auto;
+	width:900px;
+	height:720px;
+	border:1px solid black;
+	background-image: url("../image/bg/background.png");
+}
+.thumbnail { 
+	position: relative; 
+}
+.start_c{
+	display:block;
+}
+.select_word_dtn_c,.enter_menu2_c,.file_name_input_c,.file_delete_c,.menu_c,.enter_menu1_c,.menu1-2_c{
+	display:none;
+}
+.login_info_c,.select_word_dtn_c,.game_c,.favorite_print_c,.file_name_input_c,.file_select_c,.refresh_c,.table_name_c,.search_icon_c,.mean_input_c,.word_input_c,.word_input_button_c ,.over_flow_c,.empty_table_c,.search_wd_c,.start_img_c,.start_button_c,.file_delete_c,.file_add_c,.all_file_c,.all_file_naem_c,.back_c{
+	position:absolute;
+}
+.login_info_c{
+	width:400px;
+	height:44px;
+	font-size:23px;
+	padding:1px 10px 10px 10px;
+}
+.lg_name_c{
+	color:orange;
+}
+
+.logout_bt_c{
+	font-weight:bold;
+	width:179px;
+	height:30px;
+	background-color:cornsilk;
+	border:2px groove darkgrey;
+	color:brown;
+}
+.logout_bt_c:hover{
+	cursor:pointer;
+	background-color:burlywood;
+}
+.logout_bt_c:focus{
+	outline:none;
+}
+.select_word_dtn_c{
+	top:482px;
+	left:347px;
+	font-size: 26px;
+	font-family:serif;
+	font-weight:bolder;
+}
+.start_button_c{
+	left:23%;
+	top:28em;
+}
+.file_select_c,.file_delete_c{
+	right:19%;
+	top:34.5em;
+}
+.file_add_c{
+	right:6%;
+	top:34.5em;
+}
+.back_c{
+	top:1em;
+	right:1em;
+}
+.file_name_input_c{
+	width:10em;
+	text-align:center;
+}
+.game_c{
+	width:47.94em;
+	border:2px solid blue;
+	height:35.7em;
+	top:4.1em;
+	left:3.9em;
+}

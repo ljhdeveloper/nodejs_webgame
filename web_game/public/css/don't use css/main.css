@@ -1,0 +1,108 @@
+body{
+background:#D0D0D0; 
+}
+canvas {
+	width: 57%;
+	height:98%;
+	border:#909090 1px solid;
+	padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.start_img {
+	position : absolute;
+	top:61%;
+	left:35%;
+	width:30%;
+}
+.menu1_img {
+	position : absolute;
+	top:64%;
+	left:36%;/*350*/
+	display:none;
+	width:26%;
+}
+.menu2_img {
+	position : absolute;
+	top:38%;
+	left:36%;/*350*/
+	display:none;
+	width:26%;
+}
+.menu3_img {
+	position : absolute;
+	top:12%;
+	left:36%;/*350*/
+	display:none;
+	width:26%;
+}
+.back_img {
+	position : absolute;
+	top:3%;
+	right:23%;/*350*/
+	display:none;
+	width:7%;
+}
+.file_add_img {
+	position : absolute;
+	bottom:12%;
+	right:25%;/*350*/
+	display:none;
+	width:8%;
+}
+.file_delete_img {
+	position : absolute;
+	bottom:12%;
+	right:34%;/*350*/
+	display:none;
+	width:8%;
+}
+#file_name_input{
+	position : absolute;
+	display:none;
+	background: transparent;
+	font-size : 18px;
+}
+.input_word{
+	display:none;
+	position:absolute;
+	width:55%;
+	left:13%;
+	top:72%;
+	font-family:"hanna_air";
+	font-size:2.05em;
+	text-align: center;
+}
+.word_temp {
+	display:inline-block;
+	color: #606060;
+	border: solid 1px #b7b7b7;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+	cursor: pointer;
+	padding: 0.4em 2em 0.4em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	width:13%;
+}
+.word_temp:hover {	
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+	
+	text-decoration: none;
+}
+.word_temp:active {	
+	color: #999;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+	
+}
+.word_temp-1{
+	margin-left:3%;
+	display:inline-block;
+	vertical-align:middle;
+}
+.word_temp-1-1{
+	margin-top:6%;	
+}

@@ -1,0 +1,123 @@
+@charset "UTF-8";
+@FONT-FACE{font-family: "jua";src: url("../font/BMJUA_ttf.ttf");}
+body{
+	font-family:"jua";
+	font-size:21px;
+	color:brown;
+}
+.main_bg_c{
+	margin:auto;
+	width:900px;
+	height:720px;
+	border:1px solid black;
+	background-image: url("../image/bg/background.png");
+}
+.thumbnail { 
+	position: relative; 
+}
+.start_c{
+	display:block;
+}
+table,.register_img_c,.face_img_c,.file_img_div_c,.detail_menu_bg_c,.enter_reg_c,.start_img_c,.input_id_div_c,.input_submit_div_c,.input_pw_div_c{
+	position:absolute;
+}
+table{
+	background:bisque;
+	width:600px;
+	height:240px;
+	border:1px solid;
+	top:409px;
+	left:150px;
+}
+table td{
+	text-align:center;
+}
+.face_img_c{
+	top:339px;
+	left:319px;
+}
+.file_img_div_c{
+	top:213px;
+	left:145px;
+	border:1px double black;
+	width:151.1px;
+	height:151.1px;
+	background:white;
+}
+#sm_b{
+	padding-left:0px;
+}
+table tr td:nth-child(1){
+	padding-left:30px;
+}
+.register_img_c{
+	top:12px;
+	left:180px;
+}
+.file_img_c{
+	width:151.1px;
+	height:151.1px;
+}
+.reg_id_c,.reg_pw_c,.reg_name_c,.input_id_c,.input_pw_c{
+	border:none;
+	width:170px;
+	height:30px;
+	border-radius:14px;
+	opacity:0.7;
+	text-align:center;
+	font-size:17px;
+	font-weight:bold;
+	color:brown;
+}
+.reg_id_c:hover,.reg_pw_c:hover,.reg_name_c:hover,.input_id_c:hover,.input_pw_c:hover{
+	background-color:wheat;
+}
+.reg_id_c:focus,.reg_pw_c:focus,.reg_name_c:focus,.input_id_c:focus,.input_pw_c:focus{
+	background-color:wheat;
+	border:1px solid lightsalmon;
+	outline:none;
+}
+.reg_id_c,.reg_pw_c,.reg_name_c{
+	border:1px solid black;
+	width:361px;
+}
+.reg_id_c:focus,.reg_pw_c:focus,.reg_name_c:focus{
+	border:1px solid black;
+}
+.enter_reg_c{
+	width:113px;
+	height:30px;
+	top:620px;
+	right:262px;
+	border:none;
+	border-radius:11px;
+	color:currentColor;
+	background:ivory;
+}
+.enter_reg_c:hover{
+	background:darkgrey;
+	cursor:pointer;
+}
+
+.input_submit_c:hover{
+	cursor:pointer;
+	border:2px solid red;
+}
+
+.input_submit_c{
+	background-image:url("../image/button/login_button.png");
+	width:150px;
+	height:100px;
+}
+.input_id_div_c{
+	top:518px;
+	left:251px;
+}
+.input_pw_div_c{
+	top:571px;
+	left:233px;
+}
+.input_submit_div_c{
+	top:511px;
+	left:506px;
+}

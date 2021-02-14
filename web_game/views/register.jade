@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    link(rel='stylesheet' href='css/kickstart-buttons.css?ver=1')
+    link(rel='stylesheet' href='css/login.css?ver=1')
+    meta(charset='UTF-8')
+    title Insert title here
+  body
+    #main_bg.main_bg_c
+      .thumbnail
+        #start.start_c
+          img#detail_menu_bg.detail_menu_bg_c(src='image/bg/detail_menu.png')
+          img#register_img.register_img_c(src='image/bg/register_img.png')
+          #file_img_div.file_img_div_c
+            img#file_img.file_img_c(src='image/bg/empty_file.png')
+         form(method='post' action='register' enctype='multipart/form-data' name='form1')
+            input#face_img.face_img_c(type='file' name='file' accept="image/*")
+            
+            table
+              tbody
+                tr
+                  td 아이디:
+                  td
+                    input#reg_id.reg_id_c(type='text' name='reg_id' )
+                  td
+                    button#idck.small(type='button') 중복확인
+                tr
+                  td 패스워드:
+                  td(colspan='2')
+                    input#reg_pw.reg_pw_c(type='password' name='reg_pw')
+                tr
+                  td 이름:
+                  td(colspan='2')
+                    input#reg_name.reg_name_c(type='text' name='reg_name')
+                tr
+                  td#sm_b(colspan='3')
+                    input#enter_sm.large.red(type="button" value='회원가입' onClick='form_sm()')
+    
+    script(type='text/javascript' src='js/opensource/jquery-1.10.1.min.js')
+    script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+    script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+    script(src='js/login.js?ver=5')

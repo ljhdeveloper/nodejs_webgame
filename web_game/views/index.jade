@@ -1,0 +1,22 @@
+html
+  head
+    link(rel='stylesheet' href='css/login.css?ver=1')
+    meta(charset='UTF-8')
+    title 이종현 & 김예서
+  body
+    #main_bg.main_bg_c
+      .thumbnail
+        #start.start_c
+          img#start_img.start_img_c(src='image/bg/login.png')
+          form(method='post' enctype='multipart/form-date')
+            .input_id_div_c
+              | 아이디:    
+              input.input_id_c(type='text' name='input_id')
+            .input_pw_div_c
+              | 비밀번호:    
+              input.input_pw_c(type='password' name='input_pw')
+            .input_submit_div_c
+              input.input_submit_c(type='submit' name='submit' value='')
+          // login form
+          button.enter_reg_c(type='button' onclick="location.href='register'") 회원가입
+        // start div
