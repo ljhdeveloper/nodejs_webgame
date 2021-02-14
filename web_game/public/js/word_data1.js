@@ -121,6 +121,7 @@ var delete_word =function(dword){
 	}
 	word_index[file_num]--;
 	display(word_arr[file_num],word_index[file_num]);
+	db_delete_word(dword,file_num);
 }
 var search_word = function(dword){
 	search_index=0;

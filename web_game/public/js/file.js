@@ -109,7 +109,6 @@ var file_enter=function(){
 	$("#table_name").text("< "+file_name_arr[file_num]+" >");
 	$("#menu1-1").toggle();
 	$("#menu1-2").toggle();
-	console.log(file_num);
 	display(word_arr[file_num],word_index[file_num]);
 }
 var file_select=function(){
@@ -171,7 +170,7 @@ var set_user_dtn=function(data){
 			$("#file_name"+file_index).text(item.file_name);
 			file_count_global++;
 		}
-		insert_word(item.word,item.mean,item.favorite,item.memo,file_index);
-	console.log(word_arr);
+	insert_word(item.word,item.mean,item.favorite,item.memo,file_index);
 	});
+	console.log(word_arr);
 }
