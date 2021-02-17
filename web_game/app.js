@@ -34,7 +34,7 @@ app.use(passport.session());
 //플래시 메시지 관련
 app.use(flash());
 
-//app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

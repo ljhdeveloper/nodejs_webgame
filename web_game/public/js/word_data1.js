@@ -29,6 +29,7 @@ var insert_memo=function(sword,memo){
 		}
 	}
 	word_arr[file_num][i].memo=memo;
+	db_memo_modify(file_num,memo,sword);
 }
 var insert_click=function(){
 	var cw=$("#creat_word").val();
@@ -38,7 +39,7 @@ var insert_click=function(){
 	}
 	insert_word(cw,cm);
 }
-var favorite_set=function(sword){
+var favorite_set=function(sword,add_this){
 	for(i=0;i<word_index[file_num];i++){
 		if(word_arr[file_num][i].word==sword){
 			break;
@@ -46,9 +47,11 @@ var favorite_set=function(sword){
 	}
 	if ( word_arr[file_num][i].favorite ) {
 		word_arr[file_num][i].favorite=false;
+		db_favorite_modify(file_num,0,sword,add_this);
 	} 
 	else { 
 		word_arr[file_num][i].favorite=true;
+		db_favorite_modify(file_num,1,sword,add_this);
 	}
 }
 var display=function(arr,index){
@@ -103,7 +106,9 @@ var insert_word=function(nword,nmean,nfavorite,nmemo,nfile_num){
 	db_insert_word(word_arr[nfile_num][word_index[nfile_num]-1],nfile_num);
 	}
 }
-var delete_word =function(dword){
+var delete_word =function(dword){ 
+	file_delete_arr=[false,false,false,false,false,false];
+           
 	var i;
 	if(dword==undefined){
 		return;

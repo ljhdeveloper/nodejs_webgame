@@ -53,7 +53,6 @@ passport.use(new LocalStrategy({
 
           // 입력받은 ID와 비밀번호에 일치하는 회원정보가 없는 경우   
           if(result.length === 0){
-            console.log("결과 없음");
             return done(null, false, { message: '비밀번호가 틀렸습니다.' });
           }else{
             var json = JSON.stringify(result[0]);
@@ -78,7 +77,6 @@ function disableAuthenticated(req, res, next){
 }
 router.get('/', ensureAuthenticated,function(req, res, next) {
   res.render('main',{name: req.user.name});
-  console.log(req.user);
 });
 router.get('/login',disableAuthenticated,  function(req, res, next) {
    res.render('index');

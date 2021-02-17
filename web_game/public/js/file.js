@@ -1,6 +1,6 @@
 var file_name_arr=["file 0","file 1","file 2","file 3","file 4","file 5"];
 var file_delete_arr=[false,false,false,false,false,false];
-
+var check_delete_arr=false;
 var file_add = function(file_count){
 	if(file_count<6){
 		var top=8 ,font_top=13;
@@ -41,6 +41,7 @@ $("#file_name_input").keypress(function(){
 		else{
 		file_name_arr[file_name_select]=name;
 		$("#file_name"+file_name_select).text(name);
+		db_file_name_modify(name,file_name_select)
 		$("#file_name_input").css("display","none");
     	$("#file_name"+file_name_select).css("display","block");
     	file_name_select=7;
@@ -48,62 +49,6 @@ $("#file_name_input").keypress(function(){
 		}
 	}
 });
-var swap_file=function(index1,index2){
-	file_name_arr[index1]=file_name_arr[index2];
-	file_name_arr[index2]="file";
-}
-var word_arr_swap=function(use,trash){
-	word_index[use]=0;
-	for(var i=0;i<word_index[trash];i++){
-		word_arr[use][i]=new word;
-		word_arr[use][i].word=word_arr[trash][i].word;
-		word_arr[use][i].mean=word_arr[trash][i].mean;
-		word_arr[use][i].favorite=word_arr[trash][i].favorite;
-		word_arr[use][i].memo=word_arr[trash][i].memo;
-		word_index[use]++;
-	}
-	word_index[trash]=0;
-}
-var delete_f=function(){
-	var file_delete_index=0;
-	$("#all_file img").detach();
-	$("#all_file_name span").detach();
-	for(var i=0;i<file_count_global;i++){
-		if(!file_delete_arr[i]){
-			file_delete_index++;
-		}
-		else{
-			word_index[i]=0;
-			file_name_arr[i]="file";
-		}
-	}
-	if(file_delete_index===0){
-		for(var i=0;i<6;i++){
-			word_index[i]=0;
-		}
-	}
-	
-	for(var i=0;i<file_count_global;i++){
-		if(file_delete_arr[i]){
-			for(var j=file_count_global-1;j>i;j--){
-				if(!file_delete_arr[j]){
-					word_arr_swap(i,j);
-					swap_file(i,j);
-					file_delete_arr[i]=false;
-					file_delete_arr[j]=true;
-					break;
-				}
-			}
-		}
-	}
-	for(var i=0;i<6;i++){
-		file_delete_arr[i]=false;
-	}
-	for(var i=0;i<file_delete_index;i++){
-		file_add(i);
-	}
-	file_count_global=file_delete_index;
-}
 var file_enter=function(){
 	back_flag +=1;
 	$("#table_name").text("< "+file_name_arr[file_num]+" >");
@@ -111,7 +56,22 @@ var file_enter=function(){
 	$("#menu1-2").toggle();
 	display(word_arr[file_num],word_index[file_num]);
 }
+var file_delete=function(){
+	check_delete_arr=true;
+	db_file_index_set();
+	$(document.body).delegate("#file_add","click",function(){
+		if(file_count_global<6){
+		file_add(file_count_global);
+		file_count_global++;
+		}
+	});
+	$(document.body).delegate("#all_file img","click",function(){
+		file_num=$(this).index();
+		file_enter();
+	});
+}
 var file_select=function(){
+	file_delete_arr=[false,false,false,false,false,false];
 	var children = document.getElementById('all_file').childNodes;
 	for(var i=0; i<children.length; i++){
 		children[i].onmouseout = 'null';
@@ -128,38 +88,8 @@ var file_select=function(){
 		var bool =(file_delete_arr[$(this).index()])
 		?false:true;
 		file_delete_arr[$(this).index()]=bool;
+		console.log(file_delete_arr);
 	});
-}
-var file_delete=function(){
-	for(var i=0; i<file_count_global; i++){
-		$("file"+i).attr('src','image/folder/file.png');
-	}
-	delete_f();
-	$("body").undelegate("#all_file img","click");
-	$(document.body).delegate("#file_add","click",function(){
-		if(file_count_global<6){
-		file_add(file_count_global);
-		file_count_global++;
-		}
-	});
-	$(document.body).delegate("#all_file img","click",function(){
-		file_num=$(this).index();
-		file_enter();
-	});
-}
-
-var ex_word_file_add=function(){
-	file_add(file_count_global);
-	file_count_global++;
-	file_name_arr[0]="예제 영어";
-	$("#file_name0").text("예제 영어");
-	insert_word("apple","사과");
-	insert_word("redue","감소하다");
-	insert_word("league","리그");
-	insert_word("banana","바나나");
-	insert_word("year","년");
-	insert_word("control","제어하다");
-	insert_word("umbrella","우산");
 }
 var set_user_dtn=function(data){
 	data.forEach(function(item){
@@ -172,5 +102,5 @@ var set_user_dtn=function(data){
 		}
 	insert_word(item.word,item.mean,item.favorite,item.memo,file_index);
 	});
-	console.log(word_arr);
+	console.log(file_count_global);
 }

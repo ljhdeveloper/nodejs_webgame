@@ -63,6 +63,7 @@
 		}
 	});
 	$(document.body).delegate("#file_add","click",function(){
+		
 		if(file_count_global<6){
 		file_add(file_count_global);
 		file_count_global++;
@@ -82,7 +83,7 @@
 	});
 	$(document.body).delegate("input:checkbox","click",function(){
 		var spalling=$(this).parent().prev().prev().prev().prev();
-		favorite_set(spalling.text());
+		favorite_set(spalling.text(),this);
 	});
 	$(document.body).delegate("#all_file img","click",function(){
 		file_num=$(this).index();
