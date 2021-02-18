@@ -42,6 +42,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -55,7 +57,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  //res.render('error');
 });
 
 module.exports = app;
@@ -67,3 +69,17 @@ var server = app.listen(app.get('port'), function() {
 console.log('Express server listening on port ' + server.address().port);
 
 });
+
+const io = require('socket.io')(server);
+
+io.sockets.on('connection',function(socket){
+  console.log(socket.id+"들어왔습니다");
+  socket.emit('receive_user_data',function(data){
+    socket.on('get_user_data',function(data){
+
+    });
+  })
+})
+io.sockets.on('disconnect',function(socket){
+  console.log(socket.id+"나갔습니다");
+})

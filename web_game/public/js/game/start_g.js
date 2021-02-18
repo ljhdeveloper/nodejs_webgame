@@ -1,3 +1,24 @@
+
+
+function word_struct(){
+	var word='';
+	var mean='';
+	var favorite=false;
+	var memo='';
+}
+function user_struct(){
+	var name='';
+	var id='';
+	var f_image_path='';
+}
+var file_count=0;
+var file_name_arr=["file 0","file 1","file 2","file 3","file 4","file 5"];
+var word_index=[0,0,0,0,0,0];
+var word_arr =new Array();
+var user_info= new user_struct;
+for(var i=0;i<6;i++){
+	word_arr[i] =new Array();
+}
 var this_temp;
 var select_word_dtn_num="NULL";
 
@@ -9,6 +30,8 @@ var start = new Phaser.Class({
     function start ()
     {
         Phaser.Scene.call(this, { key: 'start' });
+		word_arr_set();
+		user_info_set();
     },
 
     preload: function ()
@@ -27,7 +50,8 @@ var start = new Phaser.Class({
         this.load.image('start', 'image/game/start/start.png');
 
 
-    	progressbar_set(this_temp);
+    	progressbar_set(this_temp,game_select_box);
+		
     },
 
     create: function ()
@@ -55,11 +79,13 @@ var start = new Phaser.Class({
 
 });
 var game_select_box = function(index,name){
+	console.log(word_arr,word_index,file_name_arr);
 	$("#select_word_dtn option").detach();
 	$("#select_word_dtn").append('<option value="NULL" selected="selected">---단어장 선택---</option>');
 	for(var i=0;i<index;i++){
 	$("#select_word_dtn").append('<option value="'+i+'">---'+name[i]+'---</option>');
 	}
+	$("#select_word_dtn").toggle();
 }
 $('#select_word_dtn').change(function() {
 	select_word_dtn_num = $(this).val();
@@ -85,7 +111,6 @@ var bgm_bt_control= function(bgm_bt){
 var start_bt_control= function(start){
 	 start.on('pointerdown', function (pointer) {
 		 
-		 console.log(word_index[select_word_dtn_num]);
 		if(select_word_dtn_num=="NULL"){
 			alert('단어장을 선택해주세요');
 		}
@@ -113,7 +138,7 @@ var scene_allstop =function(){
 	game.scene.stop('end');
 	game.scene.stop('start');
 }
-function progressbar_set(this_add){
+function progressbar_set(this_add,select){
 	let width = this_add.cameras.main.width;
 	let height = this_add.cameras.main.height;
 	let percentText = this_add.make.text({
@@ -142,5 +167,63 @@ function progressbar_set(this_add){
 		  progressBar.destroy();
 		  progressBox.destroy();
 		  percentText.destroy();
+		select(file_count,file_name_arr);
 		});
+}
+function word_arr_set(){
+	$.ajax({
+		async: true,
+		type : 'POST',
+		url : "/users/dtn_down",
+		dataType : "json",
+		success : function(data) {
+			set_user_dtn(data);
+		},
+		error : function(error){
+			alert("error: "+error);
+		}
+	});
+
+}
+var set_user_dtn=function(data){
+	data.forEach(function(item){
+	var file_index=item.file_index;
+	
+	if(word_index[file_index]==0){
+		file_name_arr[file_index]=item.file_name;
+		file_count++;
+	}
+	insert_word(item.word,item.mean,item.favorite,item.memo,file_index);
+	});
+}
+
+
+var insert_word=function(nword,nmean,nfavorite,nmemo,nfile_num){
+	word_arr[nfile_num][word_index[nfile_num]]=new word_struct;
+	word_arr[nfile_num][word_index[nfile_num]].word=nword;
+	word_arr[nfile_num][word_index[nfile_num]].mean=nmean;
+	word_arr[nfile_num][word_index[nfile_num]].favorite=nfavorite;
+	word_arr[nfile_num][word_index[nfile_num]].memo=nmemo;
+	word_index[nfile_num]++;
+}
+function user_info_set(){
+	$.ajax({
+		async: true,
+		type : 'POST',
+		url : "/users/user_info_down",
+		dataType : "json",
+		success : function(data) {
+			set_user_info(data);
+		},
+		error : function(error){
+			alert("error: "+error);
+		}
+	});
+}
+function set_user_info(data){
+	user_info.id=data[0].id;
+	user_info.name=data[0].name;
+	user_info.f_image_path=data[0].image;
+	console.log(user_info);
+	$("#main_bg").css('background-image',"url(.."+user_info.f_image_path+")");
 }

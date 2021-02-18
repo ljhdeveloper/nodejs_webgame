@@ -1,0 +1,63 @@
+@charset "UTF-8";
+@FONT-FACE{font-family: "jua";src: url("../font/BMJUA_ttf.ttf");}
+body{
+	font-family:"jua";
+	font-size:21px;
+	color:brown;
+}
+.login_info_c{
+	width:400px;
+	height:44px;
+	font-size:23px;
+	padding:1px 10px 10px 10px;
+}
+.lg_name_c{
+	color:orange;
+}
+
+.logout_bt_c{
+	font-weight:bold;
+	width:179px;
+	height:30px;
+	background-color:cornsilk;
+	border:2px groove darkgrey;
+	color:brown;
+}
+.logout_bt_c:hover{
+	cursor:pointer;
+	background-color:burlywood;
+}
+.logout_bt_c:focus{
+	outline:none;
+}
+.main_bg_c{
+	margin:auto;
+	width:900px;
+	height:720px;
+	border:1px solid black;
+	background-image: url("../image/bg/background.png");
+}
+.thumbnail { 
+	position: relative; 
+}
+.login_info_c,.enter_game2_c,.game_c,.detail_menu_bg_c,.select_word_dtn_c{
+	position:absolute;
+}
+.select_word_dtn_c{
+	display:none;
+}
+.select_word_dtn_c{
+	top:482px;
+	left:354px;
+	font-size: 26px;
+	font-family:serif;
+	font-weight:bolder;
+}
+
+.game_c{
+	width:36.55em;
+	border:2px solid blue;
+	height:27.2em;
+	top:3.1em;
+	left:3.1em;
+}

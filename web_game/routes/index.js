@@ -18,7 +18,7 @@ var mysql = mysql.createConnection({
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-  cb(null, 'uploads/')
+  cb(null, 'public/uploads/');
   },
   //파일이름 설정
   filename: function (req, file, cb) {
@@ -87,6 +87,9 @@ router.get('/register', disableAuthenticated, function(req, res, next) {
 router.get('/register_ok', disableAuthenticated, function(req, res, next) {
   res.render('register_ok');
 });
+router.get('/game', ensureAuthenticated, function(req, res, next) {
+  res.render('game',{name: req.user.name});
+});
 router.get('/logout', function(req,res){
   req.logout();
   req.session.save(function(){
@@ -112,7 +115,8 @@ router.post('/register',uploader.single('file'),(req,res,next)=>{
   var name=req.param("reg_name");
   var image_path = "NULL";
   if(req.file){
-    image_path=req.file.path;
+    console.log(req.file);
+    image_path="/uploads/"+req.file.filename;
   }
   var sql = 'INSERT INTO user(id,PWD,name,image) value (?,?,?,?)';
 	mysql.query(sql , [id,pw,name,image_path]);
@@ -132,5 +136,8 @@ router.post('/idck',function(req,res,next){
       }
   });
 });
-
+router.get('/game_test',  function(req, res, next) {
+  console.log("진입");
+  res.render('socket_test');
+});
 module.exports = router;

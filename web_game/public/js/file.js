@@ -102,5 +102,4 @@ var set_user_dtn=function(data){
 		}
 	insert_word(item.word,item.mean,item.favorite,item.memo,file_index);
 	});
-	console.log(file_count_global);
 }

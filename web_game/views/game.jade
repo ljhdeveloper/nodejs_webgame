@@ -1,0 +1,30 @@
+html
+    head
+        link(rel='stylesheet', href='css/game.css?ver=1')
+        meta(charset='UTF-8')
+        title Insert title here
+    body
+        #main_bg.main_bg_c
+            .thumbnail
+
+                img#detail_menu_bg.detail_menu_bg_c(src='image/bg/detail_menu.png')
+                #game.game_c
+                #login_info.login_info_c
+                    span#lg_name.lg_name_c= name
+                    | 님 환영합니다!
+                    br
+                    button#logout_bt.logout_bt_c(onclick="location.href='logout'") logout
+                    // 로그인 기록
+                select#select_word_dtn.select_word_dtn_c(name='select_word_dtn')
+    // thumbnail
+    // main_bg
+    script(type='text/javascript', src='js/opensource/jquery-1.10.1.min.js')
+    script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+    script(src='js/opensource/phaser.min.js')
+    script(src='js/game/start_g.js?ver=5')
+    script(src='js/game/main_g/player.js?ver=2')
+    script(src='js/game/main_g/set_wordarr.js?ver=2')
+    script(src='js/game/main_g/main_g.js?ver=5')
+    script(src='js/game/end_g.js?ver=5')
+    script(src='/socket.io/socket.io.js')
+    script(src='js/game/socket.js')

@@ -1,4 +1,4 @@
-function word(){
+function word_struct(){
 	var word='';
 	var mean='';
 	var favorite=false;

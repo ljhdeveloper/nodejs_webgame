@@ -55,11 +55,7 @@
 			$("#enter_menu1").toggle();
 		}
 		else if(menu_num===1){
-	    	$("#enter_menu2").toggle();
-	     	$("#select_word_dtn").css({display:"block"});
-	     	scene_allstop();
-	    	game.scene.start('start');
-	    	game_select_box(file_count_global,file_name_arr);
+			location.href='game';
 		}
 	});
 	$(document.body).delegate("#file_add","click",function(){

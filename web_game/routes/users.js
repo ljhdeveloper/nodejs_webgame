@@ -22,6 +22,17 @@ router.post('/dtn_down',function(req,res,next){
     res.send(word_dtn);
   }); 
 });
+router.post('/user_info_down',function(req,res,next){
+  var sql = 'SELECT id,name,image FROM user WHERE num=?';
+  var user_num=req.user.num;
+  mysql.query(sql , [user_num], function (err, result) {
+    if(err) console.log('mysql 에러');
+    var json = JSON.stringify(result);
+    var user_info = JSON.parse(json);
+    console.log(result);
+    res.send(user_info);
+  }); 
+});
 router.post('/word_insert',function(req,res,next){
   var sql = 'insert into word_tb values(?,?,?,?,?,?,?,?)';
   

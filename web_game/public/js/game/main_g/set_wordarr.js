@@ -1,4 +1,4 @@
-function word(){
+function word_struct(){
 	var word='';
 	var mean='';
 	var favorite=false;
@@ -9,7 +9,7 @@ var three_wd_arr =new Array();
 var ex_wd_arr =new Array();
 var game_wd_arr =new Array();
 var game_wd_index,ex_wd_arr,real_answer;
-var q_wd =new word();
+var q_wd =new word_struct();
 var collision = new Array();
 function copy_word(word1,word2){
 	word1.word=word2.word;
@@ -18,7 +18,7 @@ function copy_word(word1,word2){
 	word1.memo=word2.memo;
 }
 function swap(word1, word2){
-	var temp=new word;
+	var temp=new word_struct;
 	copy_word(temp,word1);
 	copy_word(word1,word2);
 	copy_word(word2,temp);
@@ -36,13 +36,13 @@ function select_wd(main_wd,arr,index){
 	while(x<2){
 		var randomn=random_num(0,index-1);
 		if(main_wd.word!=arr[randomn].word && x==0){
-			three_wd_arr[x]=new word;
+			three_wd_arr[x]=new word_struct;
 			copy_word(three_wd_arr[x],arr[randomn]);
 			x++;
 		}
 		if(main_wd.word!=arr[randomn].word &&
 				three_wd_arr[0].word!=arr[randomn].word && x==1){
-			three_wd_arr[x]=new word;
+			three_wd_arr[x]=new word_struct;
 			copy_word(three_wd_arr[x],arr[randomn]);
 			x++;
 		}
@@ -122,7 +122,7 @@ function q_answer(player){
 }
 var set_arr =function(index,index2,arr){
 	for(var i=0;i<index2;i++){
-		arr[i]=new word;
+		arr[i]=new word_struct;
 		copy_word(arr[i],word_arr[index][i]);
 	}
 	return index2;
