@@ -29,7 +29,6 @@ router.post('/user_info_down',function(req,res,next){
     if(err) console.log('mysql 에러');
     var json = JSON.stringify(result);
     var user_info = JSON.parse(json);
-    console.log(result);
     res.send(user_info);
   }); 
 });

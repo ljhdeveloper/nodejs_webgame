@@ -3,19 +3,73 @@ html
         link(rel='stylesheet', href='css/game.css?ver=1')
         meta(charset='UTF-8')
         title Insert title here
+        script.
+            function change(){
+                $("#join_start").toggle();
+                $("#lobby").toggle();
+            }
+            
     body
         #main_bg.main_bg_c
             .thumbnail
 
                 img#detail_menu_bg.detail_menu_bg_c(src='image/bg/detail_menu.png')
-                #game.game_c
                 #login_info.login_info_c
                     span#lg_name.lg_name_c= name
                     | 님 환영합니다!
                     br
                     button#logout_bt.logout_bt_c(onclick="location.href='logout'") logout
                     // 로그인 기록
-                select#select_word_dtn.select_word_dtn_c(name='select_word_dtn')
+                #join_start.join_start_c
+                    button#new_room.new_room_c(type='button', onclick='create_room()') 방 만들기
+                    button#join_room.join_room_c(type='button', onclick='join_room()') 방 접속
+                    select#select_word_dtn.select_word_dtn_c(name='select_word_dtn')
+                #lobby.lobby_c
+                    #room_name_div.room_name_div_c
+                        span#room_name.room_name_c
+                    table.table.table-hover
+                        thead
+                            tr
+                                th 프로필사진
+                                |       
+                                th 아이디
+                                |       
+                                th 이름
+                        |   
+                        tbody
+                            tr
+                                th(style='width:50px')
+                                    img#user_img1(src='image/bg/empty_file.png')
+                                |       
+                                td#user_id1 대기중
+                                |       
+                                td#user_name1 대기중
+                            |     
+                            tr
+                                th 
+                                    img#user_img2(src='image/bg/empty_file.png')
+                                |       
+                                td#user_id2 대기중
+                                |       
+                                td#user_name2 대기중
+                            |     
+                            tr
+                                th 
+                                    img#user_img3(src='image/bg/empty_file.png')
+                                |       
+                                td#user_id3 대기중
+                                |       
+                                td#user_name3 대기중
+                            |     
+                            tr
+                                th 
+                                    img#user_img4(src='image/bg/empty_file.png')
+                                |       
+                                td#user_id4 대기중
+                                |       
+                                td#user_name4 대기중
+                #main_game.main_game_c
+                    #game.game_c
     // thumbnail
     // main_bg
     script(type='text/javascript', src='js/opensource/jquery-1.10.1.min.js')

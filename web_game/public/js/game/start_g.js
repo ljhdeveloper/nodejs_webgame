@@ -47,7 +47,8 @@ var start = new Phaser.Class({
         this.load.image('layer1', 'image/game/start/canvas_tree.png');
         this.load.image('layer2', 'image/game/start/prison.png');
         this.load.image('layer3', 'image/game/start/logo.png');
-        this.load.image('start', 'image/game/start/start.png');
+        this.load.image('room_join', 'image/game/start/room_join.png');
+        this.load.image('room_create', 'image/game/start/room_create.png');
 
 
     	progressbar_set(this_temp,game_select_box);
@@ -63,10 +64,12 @@ var start = new Phaser.Class({
         this.add.image(385, 285, 'layer2');
         this.add.image(385, 285, 'layer3');
 
-        start=this.add.sprite(385, 500, 'start').setInteractive({useHandCursor : true});
-        bgm_bt = this.add.sprite(740,540,'sound_bt',1).setInteractive({useHandCursor : true});
+        r_create=this.add.sprite(300, 500, 'room_create').setInteractive({useHandCursor : true});
+		r_join = this.add.sprite(500, 500,'room_join').setInteractive({useHandCursor : true});
+		bgm_bt = this.add.sprite(740,540,'sound_bt',1).setInteractive({useHandCursor : true});
        bgm_bt_control(bgm_bt);
-       start_bt_control(start);
+       create_control(r_create);
+       join_control(r_join);
       // game_select_box(file_count_global,file_name_arr);
         
     },
@@ -108,7 +111,7 @@ var bgm_bt_control= function(bgm_bt){
 		//bgm_bt.setTexture('key',프레임)
     });
 }
-var start_bt_control= function(start){
+var create_control= function(start){
 	 start.on('pointerdown', function (pointer) {
 		 
 		if(select_word_dtn_num=="NULL"){
@@ -118,11 +121,14 @@ var start_bt_control= function(start){
 			alert('단어장에 3개 단어 이상의 단어가 필요합니다');
 		}
 		else{
-		this_temp.scene.stop('start');
+		var room =prompt('새로운 방 이름을 입력하세요:');
+		socket.emit('join_room',room);
+    
+		/*this_temp.scene.stop('start');
 		scene_allstop();
      	game.scene.start('main');
      	$("#select_word_dtn").toggle();
-    	start_bgm.stop();
+    	start_bgm.stop();*/
 		}
 	});
      start.on('pointerover', function (pointer) {
@@ -132,7 +138,19 @@ var start_bt_control= function(start){
      	this.clearTint();
      });
 }
-
+var join_control= function(start){
+	start.on('pointerdown', function (pointer) {
+		var room =prompt('들어갈 방 이름을 입력하세요:');
+		socket.emit('join_room',room);
+		
+	});
+	start.on('pointerover', function (pointer) {
+		this.setTint(0xff0000);
+	});
+	start.on('pointerout', function (pointer) {
+		this.clearTint();
+	});
+}
 var scene_allstop =function(){
 	game.scene.stop('main');
 	game.scene.stop('end');
@@ -224,6 +242,7 @@ function set_user_info(data){
 	user_info.id=data[0].id;
 	user_info.name=data[0].name;
 	user_info.f_image_path=data[0].image;
+	socket.emit('get_user_data',user_info);
 	console.log(user_info);
-	$("#main_bg").css('background-image',"url(.."+user_info.f_image_path+")");
+	//$("#main_bg").css('background-image',"url(.."+user_info.f_image_path+")");
 }
