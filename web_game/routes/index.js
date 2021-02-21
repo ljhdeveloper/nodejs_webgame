@@ -55,7 +55,6 @@ passport.use(new LocalStrategy({
           if(result.length === 0){
             return done(null, false, { message: '비밀번호가 틀렸습니다.' });
           }else{
-            console.log("로그인성공");
             var json = JSON.stringify(result[0]);
             var userinfo = JSON.parse(json);
             return done(null, userinfo);  // result값으로 받아진 회원정보를 return해줌
@@ -111,9 +110,9 @@ router.post('/login',passport.authenticate('local',{
 }));
 router.post('/register',uploader.single('file'),(req,res,next)=>{
 
-  var id=req.param("reg_id");
-  var pw=req.param("reg_pw");
-  var name=req.param("reg_name");
+  var id=req.body.reg_id;
+  var pw=req.body.reg_pw;
+  var name=req.body.reg_name;
   var image_path = "NULL";
   if(req.file){
     console.log(req.file);

@@ -40,10 +40,22 @@ body{
 .thumbnail { 
 	position: relative; 
 }
-.room_name_div_c,.join_room_c,.new_room_c,.join_start_c,.lobby_c,.main_game_c,.login_info_c,.enter_game2_c,.detail_menu_bg_c,.select_word_dtn_c{
+.game_word_name_c{
+	top:453px;
+	left:77px;
+	font-size:34px;
+	color: cornflowerblue;
+}
+.game_start_bt{
+	top:455px;
+	left:564px;
+	width:100px;
+	height:60px;
+}
+.game_start_bt,.game_word_name_c,.room_name_div_c,.join_room_c,.new_room_c,.join_start_c,.lobby_c,.main_game_c,.login_info_c,.enter_game2_c,.detail_menu_bg_c,.select_word_dtn_c{
 	position:absolute;
 }
-.select_word_dtn_c,.lobby_c,.main_game_c{
+.lobby_c,.main_game_c{
 	display:none;
 }
 .join_start_c{
@@ -58,6 +70,7 @@ body{
 	font-size: 24px;
 	font-family:serif;
 	font-weight:bolder;
+	text-align-last: center;
 }
 .room_name_div_c{
 	width:100%;
@@ -127,4 +140,19 @@ body{
     text-align: left;
     vertical-align: bottom;
     border-bottom: 1px solid transparent;
+}
+.chatting_c{
+	display:none;
+	text-aling:center;
+}
+.chat_input_c{
+	display:inline;
+}
+.chat_box_c{
+    border: 1px solid black;
+    margin:auto;
+    width: 600px;
+	overflow: auto;
+    height: 160px;
+	
 }

@@ -12,6 +12,21 @@ var mysql = mysql.createConnection({
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
+router.post('/file_name_get',function(req,res,next){
+  var user_num=req.user.num;
+  var sql = 'SELECT file_index,file_name FROM word_tb WHERE user_num=? ORDER BY file_index ASC';
+  mysql.query(sql , [user_num], function (err, result) {
+    res.send(result);
+  }); 
+});
+router.post('/word_arr_get',function(req,res,next){
+  var user_num=req.user.num;
+  var file_index=req.body.file_index;
+  var sql = 'SELECT word,mean,favorite,wrong FROM word_tb WHERE user_num=? AND file_index=?';
+  mysql.query(sql , [user_num,file_index], function (err, result) {
+    res.send(result);
+  }); 
+});
 router.post('/dtn_down',function(req,res,next){
   var sql = 'SELECT * FROM word_tb WHERE user_num=? ORDER BY file_index ASC';
   var user_num=req.user.num;

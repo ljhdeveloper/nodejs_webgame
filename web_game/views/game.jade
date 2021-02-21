@@ -3,11 +3,6 @@ html
         link(rel='stylesheet', href='css/game.css?ver=1')
         meta(charset='UTF-8')
         title Insert title here
-        script.
-            function change(){
-                $("#join_start").toggle();
-                $("#lobby").toggle();
-            }
             
     body
         #main_bg.main_bg_c
@@ -27,6 +22,8 @@ html
                 #lobby.lobby_c
                     #room_name_div.room_name_div_c
                         span#room_name.room_name_c
+                    span#game_word_name.game_word_name_c asdsadasd
+                    button#game_start_bt.game_start_bt(type='button', onclick='game_start()') 게임시작
                     table.table.table-hover
                         thead
                             tr
@@ -72,13 +69,18 @@ html
                     #game.game_c
     // thumbnail
     // main_bg
+    #chatting.chatting_c
+        #chat_box.chat_box_c
+        input#chat_input.chat_input_c(type='text', name='chat_input')
+        button#chat_submit.chat_submit_c(onclick='chat_submit()') 메세지 전송
+
     script(type='text/javascript', src='js/opensource/jquery-1.10.1.min.js')
     script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
     script(src='js/opensource/phaser.min.js')
-    script(src='js/game/start_g.js?ver=5')
-    script(src='js/game/main_g/player.js?ver=2')
-    script(src='js/game/main_g/set_wordarr.js?ver=2')
-    script(src='js/game/main_g/main_g.js?ver=5')
-    script(src='js/game/end_g.js?ver=5')
+    // script(src='js/game/start_g.js?ver=5')
+        script(src='js/game/main_g/player.js?ver=2')
+        script(src='js/game/main_g/set_wordarr.js?ver=2')
+        script(src='js/game/main_g/main_g.js?ver=5')
+        script(src='js/game/end_g.js?ver=5')
     script(src='/socket.io/socket.io.js')
     script(src='js/game/socket.js')

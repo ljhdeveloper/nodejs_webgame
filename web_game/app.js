@@ -12,6 +12,7 @@ var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { emit } = require('process');
 var app = express();
 
 // view engine setup
@@ -78,102 +79,103 @@ console.log('Express server listening on port ' + server.address().port);
 
 
 
-function roominfo(){
-	var nickname='';
-	var game_id='';
-	var image='';
+
+function room_info (room_name,word_arr,word_name){
+  this.room_name=room_name;
+  this.word_arr=word_arr;
+  this.word_name=word_name;
+}	
+function user_info(id,name,image) {
+  this.game_id=id;
+  this.nickname=name;
+  this.image=image;
 }
 
-
-
-
 const io = require('socket.io')(server);
-
 io.sockets.on('connection',function(socket){
-  var in_room;
-  console.log(socket.id+"들어왔습니다");
-    socket.on('get_user_data',function(data){
-      socket.nickname=data.name;
-      socket.image=data.f_image_path;
-      socket.game_id=data.id;
-    });
-    socket.on('disconnect',function(){
-      console.log(socket.id+"나갔습니다");
-      if(typeof in_room!="undefined"){
-        var room_user = new Array;
-        var sc = socket_room_member_check(in_room);
-        if(!sc) return ;
-        socket.leave(in_room);
-        console.log(socket.nickname+"가 "+in_room+"방나감");
-        for(var i=0; i<sc.length; i++){
-          room_user[i]=new roominfo;
-          room_user[i].game_id=sc[i].game_id;
-          room_user[i].nickname=sc[i].nickname;
-          room_user[i].image=sc[i].image;
-        }
-        console.log(room_user);
-         io.to(in_room).emit('set_lobby',room_user);
-      }
-    });
-    socket.on('join_room',function(data){
+
+  socket.on('get_user_data',function(data){
+      socket.user_info=new user_info(data[0].id,data[0].name,data[0].image);
+  });
+
+  socket.on('create_room',function(data,cb){
+    if(!check_room_num(data.room_name)){
+      socket.join(data.room_name);
+      socket.room_info=new room_info(data.room_name,data.game_word,data.file_name);
+      lobby_info_emit(socket.room_info);
+      cb(true);
+    }else{
+      console.log("방생성 실패");
+      cb(false);
+    }
+  });
+  socket.on('join_room',function(data,cb){
+    var num=check_room_num(data);
+    if(num>0 && num<4){
       socket.join(data);
-      var sc = socket_room_member_check(data);
-      var room_user = new Array;
-      if(sc.length>1&&sc.length<5){
-      for(var i=0; i<sc.length; i++){
-        room_user[i]=new roominfo;
-        room_user[i].game_id=sc[i].game_id;
-        room_user[i].nickname=sc[i].nickname;
-        room_user[i].image=sc[i].image;
+      room_all_mem(data,function(data,index){
+        socket.room_info=data[0].room_info;
+      });
+      lobby_info_emit(socket.room_info);
+      cb(true);
+    }else{
+      console.log("방접속 실패");
+      cb(false);
+    }
+  });
+  socket.on('chatting',function(data){
+    if(!socket.user_info) return;
+    if(data){
+      var chat_packet={
+        user_id:socket.user_info.game_id,
+        name:socket.user_info.nickname,
+        chat:data
       }
-      socket.emit('lobby_enter', {"bool":true,"room_name":data});
-      io.to(data).emit('set_lobby',room_user);
-      in_room=data;
-      }
-      else{
-       socket.emit('lobby_enter', {"bool":false});
-        socket.leave(data);
-      //io.sockets.sockets[socket.id].emit('lobby_enter',false);
-      }
-    })
-    socket.on('create_room',function(data){
-      socket.join(data);
-      var sc = socket_room_member_check(data);
-      if(sc.length>1){
-         socket.emit('create_lobby_enter', {"bool":false});
-        socket.leave(data);
-      }
-      else{
-        in_room=data;
-        var data1 =new roominfo;
-        data1.game_id = socket.game_id;
-        data1.image = socket.image;
-        data1.nickname = socket.nickname;
-         socket.emit('create_lobby_enter',{"bool":true,'data':data1,'room_name':data});
-      
-      //io.sockets.sockets[socket.id].emit('lobby_enter',false);
-      }
-    })
+      io.to(socket.room_info.room_name).emit('chat_show',chat_packet);
+    }
+  });
+
+  socket.on('disconnect',function(){
+    if(socket.room_info){
+      socket.leave(socket.room_info.room_name);
+      console.log(socket.room_info.room_name+"방 종료");
+      lobby_info_emit(socket.room_info);
+    }
+  });
 });
 
 
-  var socket_room_member_check = function(roomname){
-  const clients = io.sockets.adapter.rooms.get(roomname);
-      if(typeof clients === 'undefined')return false;
-      //to get the number of clients in this room
-     console.log(clients);
-
-      const numClients = clients ? clients.size : 0;
-      //to just emit the same event to all members of a room
-      //io.to(roomname).emit('new event', 'Updates');
-      const clientSocket =new Array;
-      var i=0;
-      for (const clientId of clients ) {
-          //this is the socket of each client in the room.
-          clientSocket[i] = io.sockets.sockets.get(clientId);
-          //you can do whatever you need with this
-          //clientSocket.leave('Other Room')
-          i++;
-      }
-      return clientSocket;
+function lobby_info_emit(data,cb){
+  var user=[], i=0; 
+  var lobby_data = {
+    user:new Array(),
+    room_name:data.room_name,
+    game_word:data.word_arr,
+    word_name:data.word_name
+  }
+  room_all_mem(data.room_name,function(data,index){
+    for(var i=0;i<index;i++){
+      lobby_data.user[i]=data[i].user_info;
     }
+  })
+  io.to(data.room_name).emit('lobby_set',lobby_data);
+}
+
+function check_room_num(roomname){
+  const clients = io.sockets.adapter.rooms.get(roomname);
+  const room_mem_num = clients ? clients.size : 0;
+  console.log(roomname+"방의 인원수: "+room_mem_num);
+  if(typeof clients === 'undefined') return room_mem_num;
+  else return room_mem_num;
+}
+function room_all_mem(roomname,cb){
+  const clients = io.sockets.adapter.rooms.get(roomname);
+  if(typeof clients === 'undefined')return false;
+  const clientSocket =new Array;
+  var i=0;
+    for (const clientId of clients ) {
+      clientSocket[i] = io.sockets.sockets.get(clientId);
+      i++;
+    }
+  cb(clientSocket,i);
+}
